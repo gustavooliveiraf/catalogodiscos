@@ -13,11 +13,7 @@
         <input name="titulo" id="titulo" autocomplete="off" v-model="collection.name" class="form-control">
       </div>
 
-      <div class="controle form-group">
-        <label for="url">URL</label>
-        <input name="url" id="url" autocomplete="off" v-model="collection.url" class="form-control">
-        <img v-show="collection.url" :src="collection.url" :alt="collection.name"/>         
-      </div>
+      <input type="file" @change="onFileChanged">
 
       <div class="controle form-group">
         <label for="description">Descrição</label>
@@ -49,7 +45,8 @@ export default {
   data() {
       return {
           collection: new Collection(),
-          id: this.$route.params.id
+          id: this.$route.params.id,
+          selectedFile: null
       }
   },
 
@@ -57,7 +54,11 @@ export default {
       save() {
         if (this.collection.name) {
           if(!this.collection.id) {
-            this.$http.post('collections', this.collection)
+            const formData = new FormData()
+            formData.append('image', this.selectedFile, this.selectedFile.name)
+            formData.append('collection', JSON.stringify(this.collection))
+
+            this.$http.post('collections', formData)
               .then(res => res.json())
               .then(res => {
                 this.$notify({
@@ -91,6 +92,10 @@ export default {
             text: "Preencha pelo menos o campo Título."
           });
         }
+      },
+
+      onFileChanged (event) {
+        this.selectedFile = event.target.files[0]
       }
   },
 
