@@ -71,7 +71,11 @@ export default {
                 this.$router.push({ name: 'home' })
               })
           } else {
-            this.$http.put('collections', this.collection)
+            const formData = new FormData()
+            formData.append('image', this.selectedFile, this.selectedFile.name)
+            formData.append('collection', JSON.stringify(this.collection))
+
+            this.$http.put('collections', formData)
               .then(res => res.json())
               .then(res => {
                 this.$notify({

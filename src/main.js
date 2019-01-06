@@ -15,7 +15,7 @@ Vue.use(VueResource);
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
 
-Vue.http.options.root = 'http://localhost:8000';
+Vue.http.options.root = 'http://ec2-54-175-149-19.compute-1.amazonaws.com:8000';
 
 const router = new VueRouter({ 
   routes, 
