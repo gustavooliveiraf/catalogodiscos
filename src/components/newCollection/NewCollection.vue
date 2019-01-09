@@ -36,7 +36,6 @@
         <router-link :to="{ name: 'home'}"><my-button tags="Voltar" styles="danger" type="button"/></router-link>
         <my-button tags="Gravar" styles="default" type="submit"/>
       </div>
-
     </form>
   </div>
 </template>
@@ -155,6 +154,6 @@ export default {
   }
   .img{
     margin-top: 20px;
-    border-radius: 50px;
+    border-radius: 50%;
   }
 </style>

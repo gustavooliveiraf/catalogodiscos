@@ -4,8 +4,8 @@
     <p v-show="mensagem" class="centralizado">{{ mensagem }}</p>
 
     <div class="card-columns">
-      <div class="card mb-3" v-for="collection in collections">
-        <img class="card-img-top pointer" @click="listDisc(collection.id)" :src="collection.url" :alt="collection.name">
+      <div class="card mb-3 img" v-for="collection in collections">
+        <img class="card-img-top pointer img" @click="listDisc(collection.id)" :src="collection.url" :alt="collection.name">
         <div class="card-body">
           <h5 class="card-title pointer" @click="listDisc(collection.id)">{{ collection.name }}</h5>
           <p class="card-text pointer" @click="listDisc(collection.id)">{{ collection.description }}</p>
@@ -122,7 +122,7 @@ export default {
     animation: all ease-in-out 0.5s;
   }
 
-   .add-buttom{
+  .add-buttom{
     position: fixed;
     right: 15px;
     bottom: 15px;
@@ -131,4 +131,7 @@ export default {
     height: 70px;
   }
 
+  .img{
+    border-radius: 20px;
+  }
 </style>
