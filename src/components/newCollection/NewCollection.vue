@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <CustomNotifications></CustomNotifications>
     <h1 class="centralizado">Nova Coleção</h1>
 
@@ -13,7 +14,17 @@
         <input name="titulo" id="titulo" autocomplete="off" v-model="collection.name" class="form-control">
       </div>
 
-      <input type="file" @change="onFileChanged">
+      <input 
+      style="display: none"
+      type="file" 
+      @change="onFileChanged"
+      ref="fileInput"
+      >
+      <button type="button" @click="$refs.fileInput.click()" class="btn btn-primary"><i class="fas fa-file-image"></i> Enviar Imagem</button>
+    
+      <div class="controle form-group" v-if="this.img.length != 0">
+        <img :src="this.img" width="100px" height="100px" class="img">
+      </div>
 
       <div class="controle form-group">
         <label for="description">Descrição</label>
@@ -46,7 +57,8 @@ export default {
       return {
           collection: new Collection(),
           id: this.$route.params.id,
-          selectedFile: null
+          selectedFile: null,
+          img: ""
       }
   },
 
@@ -100,6 +112,7 @@ export default {
 
       onFileChanged (event) {
         this.selectedFile = event.target.files[0]
+        this.img = URL.createObjectURL(this.selectedFile)
       }
   },
 
@@ -139,5 +152,9 @@ export default {
 
   .erro {
     color: red;
-  } 
+  }
+  .img{
+    margin-top: 20px;
+    border-radius: 50px;
+  }
 </style>
